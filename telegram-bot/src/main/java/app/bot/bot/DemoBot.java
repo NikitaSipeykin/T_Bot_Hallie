@@ -1,27 +1,19 @@
 package app.bot.bot;
 
 import app.bot.bot.responce.BotResponseProcessor;
-import app.bot.bot.responce.TextResponse;
 import app.bot.config.BotProperties;
 import app.bot.dispatcher.CallbackDispatcher;
 import app.bot.dispatcher.CommandDispatcher;
 import app.bot.dispatcher.MessageDispatcher;
-import app.bot.keyboard.KeyboardFactory;
-import app.bot.keyboard.KeyboardOption;
 import app.bot.sender.TelegramSender;
 import app.bot.state.UserStateService;
 import app.core.payment.PaymentCommand;
-import app.core.program.DailyUpdateResult;
 import app.module.node.texts.BotTextService;
-import app.module.node.texts.TextMarker;
 import app.module.payment.PaymentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.AnswerPreCheckoutQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import java.util.List;
 
 @Component
 @Slf4j
@@ -80,28 +72,5 @@ public class DemoBot extends BaseTelegramBot {
   protected void handleUnknown(Update update) {
     log.warn("Unhandled update: {}", update);
   }
-
-//  @Scheduled(cron = "00 00 08 * * *")
-//  public void scheduledDailyUpdate() {
-//    log.info("DB daily update");
-//
-//    List<DailyUpdateResult> updates = programService.dailyUpdate();
-//    log.info("updates = {}", updates);
-//
-//    for (DailyUpdateResult upd : updates) {
-//
-//      TextResponse response = new TextResponse(
-//          upd.chatId(),
-//          text.format(TextMarker.SCHEDULER_MESSAGE),
-//          KeyboardFactory.from(
-//              List.of(
-//                  new KeyboardOption("Ура!", TextMarker.PROGRAM)
-//              )
-//          )
-//      );
-//
-//      telegramSender.send(response);
-//    }
-//  }
 
 }

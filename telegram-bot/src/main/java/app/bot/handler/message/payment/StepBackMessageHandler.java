@@ -32,10 +32,10 @@ public class StepBackMessageHandler implements MessageHandler {
 
     analyticsFacade.trackBlockView(chatId, "PAYMENT_STEP_BACK", Map.of("source", "payment_flow"));
 
-    analyticsFacade.trackCtaShown(chatId, TextMarker.VIBRATIONS_AND_CHAKRAS);
+    analyticsFacade.trackCtaShown(chatId, TextMarker.PROJECT_DESCRIPTION);
 
     return new TextResponse(chatId, "Хотите вернуться к описанию курса?",
         KeyboardFactory.from(List.of(
-            new KeyboardOption("Да", TextMarker.VIBRATIONS_AND_CHAKRAS))));
+            new KeyboardOption("Да", TextMarker.PROJECT_DESCRIPTION))));
   }
 }

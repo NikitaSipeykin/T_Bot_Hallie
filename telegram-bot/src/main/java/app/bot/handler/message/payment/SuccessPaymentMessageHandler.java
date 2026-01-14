@@ -37,9 +37,9 @@ public class SuccessPaymentMessageHandler implements MessageHandler {
 
     analyticsFacade.trackBlockView(chatId, "SUCCESS_PAYMENT", Map.of("source", "payment_flow"));
 
-    analyticsFacade.trackCtaShown(chatId, TextMarker.PROGRAM);
+    analyticsFacade.trackCtaShown(chatId, TextMarker.AFTER_PAYMENT);
 
     return new TextResponse(chatId, "✅ Оплата прошла успешно! Добро пожаловать в программу",
-        KeyboardFactory.from(List.of(new KeyboardOption("Начать", TextMarker.PROGRAM))));
+        KeyboardFactory.from(List.of(new KeyboardOption("Начать", TextMarker.AFTER_PAYMENT))));
   }
 }

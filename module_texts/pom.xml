@@ -50,6 +50,13 @@
             <version>3.1.0</version>
         </dependency>
 
+        <!-- MODULES -->
+        <dependency>
+            <groupId>app.bot</groupId>
+            <artifactId>module_core</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

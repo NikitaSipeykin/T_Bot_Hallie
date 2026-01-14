@@ -1,0 +1,66 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build_and_push_bot:
+    name: Build Telegram Bot Image
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Telegram Bot
+        run: |
+          IMAGE=ghcr.io/nikitasipeykin/telegram-bot-nikita-sipeikin
+          TAG=${{ github.sha }}
+
+          docker build -t $IMAGE:$TAG -f telegram-bot/Dockerfile .
+          docker tag $IMAGE:$TAG $IMAGE:latest
+
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest
+
+  build_and_push_web:
+    name: Build Web App Image
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Web App
+        run: |
+          IMAGE=ghcr.io/nikitasipeykin/web-app-nikita-sipeikin
+          TAG=${{ github.sha }}
+
+          docker build -t $IMAGE:$TAG -f web-app/Dockerfile .
+          docker tag $IMAGE:$TAG $IMAGE:latest
+
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest

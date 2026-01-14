@@ -56,15 +56,15 @@ public class AnalyticsFacade {
     );
   }
 
-  public void trackTestAlreadyFinished(Long chatId) {
-    trackSafe(
-        AnalyticsEventCreateDto.builder()
-            .chatId(chatId)
-            .eventType("TEST_ALREADY_FINISHED")
-            .blockName(TextMarker.TEST_END_ALREADY)
-            .build()
-    );
-  }
+//  public void trackTestAlreadyFinished(Long chatId) {
+//    trackSafe(
+//        AnalyticsEventCreateDto.builder()
+//            .chatId(chatId)
+//            .eventType("TEST_ALREADY_FINISHED")
+//            .blockName(TextMarker.ERROR)
+//            .build()
+//    );
+//  }
 
   public void trackTestAnswer(Long chatId, String answerCode) {
     trackSafe(

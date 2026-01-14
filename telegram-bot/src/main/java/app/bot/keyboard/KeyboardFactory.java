@@ -1,6 +1,5 @@
 package app.bot.keyboard;
 
-import app.core.test.AnswerOption;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -16,9 +15,6 @@ public final class KeyboardFactory {
     return build(options, KeyboardOption::text, KeyboardOption::callback);
   }
 
-  public static InlineKeyboardMarkup toKeyboard(List<AnswerOption> options) {
-    return build(options, AnswerOption::getText, AnswerOption::getCallback);
-  }
 
   private static <T> InlineKeyboardMarkup build(List<T> options, java.util.function.Function<T, String> textMapper,
       java.util.function.Function<T, String> callbackMapper

@@ -28,26 +28,26 @@ public class IntroPaymentCallbackHandler implements CallbackHandler {
 
   @Override
   public boolean supports(String callbackData) {
-    return callbackData.equals(TextMarker.VIBRATIONS_AND_CHAKRAS);
+    return callbackData.equals(TextMarker.PROJECT_DESCRIPTION);
   }
 
   @Override
   public BotResponse handle(CallbackQuery query) {
     Long chatId = query.getMessage().getChatId();
-    analytics.trackButtonClick(query, TextMarker.VIBRATIONS_AND_CHAKRAS);
+    analytics.trackButtonClick(query, TextMarker.PROJECT_DESCRIPTION);
 
     userStateService.setState(chatId, UserState.NEED_PAYMENT);
 
     analytics.trackBlockView(
         chatId,
-        TextMarker.VIBRATIONS_AND_CHAKRAS,
+        TextMarker.PROJECT_DESCRIPTION,
         Map.of(
             "state", UserState.NEED_PAYMENT.name(),
             "source", "callback"
         )
     );
 
-    return new TextResponse(chatId, textService.get(TextMarker.VIBRATIONS_AND_CHAKRAS),
+    return new TextResponse(chatId, textService.get(TextMarker.PROJECT_DESCRIPTION),
         KeyboardFactory.from(List.of(
             new KeyboardOption("Да, записаться!", TextMarker.PAYMENT),
             new KeyboardOption("Расскажи подробнее", TextMarker.INFO_PROGRAM))));
