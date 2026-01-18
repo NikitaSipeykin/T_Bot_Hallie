@@ -80,6 +80,7 @@ public class EmailService {
 
 
       helper.setTo(email);
+      helper.setFrom("Hallie <noreply@hallie.bot>");
       helper.setSubject("👋 Hallie demo — email delivery");
       helper.setText(html, true); // true = HTML
 
