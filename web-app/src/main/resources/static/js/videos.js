@@ -27,7 +27,7 @@ function splitKeysByType() {
             videoKeys[key] = file;
         } else if (key.startsWith("DOC_")) {
             docKeys[key] = file;
-        } else if (key.startsWith("PROGRAM_")) {   // ← НОВОЕ
+        } else if (key.startsWith("AUDIO_")) {   // ← НОВОЕ
             audioKeys[key] = file;
         }
     });

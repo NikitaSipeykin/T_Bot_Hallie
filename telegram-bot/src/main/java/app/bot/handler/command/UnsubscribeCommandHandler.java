@@ -1,5 +1,6 @@
 package app.bot.handler.command;
 
+import app.bot.bot.CommandKey;
 import app.bot.bot.responce.BotResponse;
 import app.bot.bot.responce.TextResponse;
 import app.bot.facade.AnalyticsFacade;
@@ -26,7 +27,7 @@ public class UnsubscribeCommandHandler implements CommandHandler {
 
   @Override
   public String command() {
-    return "/unsubscribe";
+    return CommandKey.UNSUBSCRIBE;
   }
 
   @Override

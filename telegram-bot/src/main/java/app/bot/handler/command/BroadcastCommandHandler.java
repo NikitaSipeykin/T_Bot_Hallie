@@ -1,6 +1,7 @@
 package app.bot.handler.command;
 
 
+import app.bot.bot.CommandKey;
 import app.bot.bot.responce.BotResponse;
 import app.bot.bot.responce.TextResponse;
 import app.bot.config.BotProperties;
@@ -25,7 +26,7 @@ public class BroadcastCommandHandler implements CommandHandler {
 
   @Override
   public String command() {
-    return "/broadcast";
+    return CommandKey.BROADCAST;
   }
 
   @Override

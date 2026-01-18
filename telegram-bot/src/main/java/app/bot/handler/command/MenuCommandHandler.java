@@ -1,5 +1,6 @@
 package app.bot.handler.command;
 
+import app.bot.bot.CommandKey;
 import app.bot.bot.responce.BotResponse;
 import app.bot.bot.responce.TextResponse;
 import app.bot.keyboard.KeyboardFactory;
@@ -20,7 +21,7 @@ public class MenuCommandHandler implements CommandHandler {
   private final BotTextService textService;
   @Override
   public String command() {
-    return "/menu";
+    return CommandKey.MENU;
   }
 
   @Override

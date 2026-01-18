@@ -1,5 +1,6 @@
 package app.bot.handler.command;
 
+import app.bot.bot.CommandKey;
 import app.bot.bot.responce.*;
 import app.bot.facade.AnalyticsFacade;
 import app.bot.state.UserState;
@@ -21,7 +22,7 @@ public class AdminQuestionCommandHandler implements CommandHandler {
 
   @Override
   public String command() {
-    return "/request";
+    return CommandKey.REQUEST;
   }
 
   @Override
