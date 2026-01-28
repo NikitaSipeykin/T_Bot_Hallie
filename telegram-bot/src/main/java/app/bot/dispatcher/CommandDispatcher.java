@@ -25,7 +25,7 @@ public class CommandDispatcher {
   public BotResponse dispatch(Message message) {
     String text = message.getText();
 
-    log.debug("text = " + text);
+    log.debug("Command text = " + text);
     if (text == null || !text.startsWith("/")) {
       return null;
     }

@@ -16,7 +16,7 @@ public class BroadcastService {
   }
 
   public void broadcast(String text) {
-    log.debug("broadcast()");
+    log.debug("broadcast --->");
     subscriberService.getActiveSubscribers()
         .forEach(chatId ->
             sender.sendText(chatId, text)
