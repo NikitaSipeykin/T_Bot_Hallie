@@ -39,12 +39,16 @@ public class TelegramSender {
     } else if (response instanceof CompositeResponse r) {
       r.responses().forEach(this::send);
 
-    } else if (response instanceof SendInvoiceResponse r){
+    } else if (response instanceof SendInvoiceResponse r) {
       sendInvoice(r);
+
+    } else if (response instanceof VideoResponse r) {
+      sendVideo(r);
+
     }
   }
 
-  private void sendInvoice(SendInvoiceResponse invoiceResponse){
+  private void sendInvoice(SendInvoiceResponse invoiceResponse) {
     SendInvoice invoice = invoiceResponse.response();
 
     try {
@@ -68,6 +72,19 @@ public class TelegramSender {
     } catch (TelegramApiException e) {
       log.error("Error sending message to chatId={}", r.chatId(), e);
     }
+  }
+
+  private void sendVideo(VideoResponse r) {
+
+    try {
+      File videoNote = mediaService.getFileByKey(r.fileId());
+
+      var sendVideo = noteService.buildVideo(r.chatId(), videoNote, r.width(), r.height());
+      botProvider.getObject().execute(sendVideo);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
 

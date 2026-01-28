@@ -64,9 +64,6 @@ public class EmailService {
       String bg = presigned("/hallie/1_header-bg.png");
 
 
-      log.info("Hallie half = " + hallieHalf);
-
-
       html = html
           .replace("{{user_name}}", userName)
           .replace("{{chat}}", chat)

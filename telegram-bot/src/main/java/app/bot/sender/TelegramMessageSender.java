@@ -23,7 +23,7 @@ public class TelegramMessageSender implements MessageSender {
         .text(text)
         .build();
 
-    log.info("msg = " + msg);
+    log.debug("MessageSender msg = " + msg);
     sendMessage(msg);
   }
 

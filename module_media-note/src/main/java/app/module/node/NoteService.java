@@ -1,11 +1,8 @@
 package app.module.node;
 
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
-import org.telegram.telegrambots.meta.api.methods.send.SendVideoNote;
-import org.telegram.telegrambots.meta.api.methods.send.SendVoice;
+import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 
 import java.io.File;
 
@@ -18,6 +15,16 @@ public class NoteService {
     note.setVideoNote(new InputFile(videoFile));
 
     return note;
+  }
+
+  public SendVideo buildVideo(Long chatId, File videoFile, Integer width, Integer height) {
+    SendVideo video = new SendVideo();
+    video.setChatId(chatId);
+    video.setVideo(new InputFile(videoFile));
+    video.setWidth(width);
+    video.setHeight(height);
+
+    return video;
   }
 
   public SendVoice buildVoice(Long chatId, File audioFile) {

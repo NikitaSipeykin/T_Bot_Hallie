@@ -43,7 +43,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
   @Scheduled(cron = "0 0 */6 * * *")
   public void updateRates() {
     try {
-      log.info("Updating exchange rates...");
+      log.debug("Updating exchange rates...");
 
       JsonNode response = webClient.get()
           .uri("/v6/latest/{base}", BASE)
@@ -58,7 +58,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         rates.put(currency, rate);
       }
 
-      log.info("Exchange rates updated: {}", rates);
+      log.debug("Exchange rates updated: {}", rates);
 
     } catch (Exception e) {
       log.error("Failed to update exchange rates, using cached values", e);
