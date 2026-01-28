@@ -44,7 +44,7 @@ public class DemoAccessCallbackHandler implements CallbackHandler {
     CompositeResponse delayedResponse = new CompositeResponse(new ArrayList<>());
 
     MediaResponse audio = new MediaResponse(chatId, MediaType.VOICE, CommandKey.ACCESS_AUDIO);
-    MediaResponse video = new MediaResponse(chatId, MediaType.VIDEO, CommandKey.ACCESS_VIDEO);
+    VideoResponse video = new VideoResponse(chatId, MediaType.VIDEO, CommandKey.ACCESS_VIDEO, 1280, 1002);
     TextResponse text1 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_PAYMENT), null);
     TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_NEXT),
         KeyboardFactory.from(List.of(
