@@ -13,5 +13,5 @@ public enum UserState {
   HALLIE,
   BOT_ABILITY,
   DEMO_ACCESS,
-  EMAIL, STATES, DEMO
+  EMAIL, STATES, AI, DEMO
 }

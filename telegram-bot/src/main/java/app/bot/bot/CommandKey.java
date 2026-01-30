@@ -22,4 +22,5 @@ public class CommandKey {
   public static final String ASK_EMAIL_AUDIO = "AUDIO_ASK_EMAIL_AUDIO";
   public static final String STATE_AUDIO = "AUDIO_STATE_AUDIO";
   public static final String HALLIE_USE_IT = "AUDIO_HALLIE_USE_IT";
+  public static final String AI = "/ai";
 }
