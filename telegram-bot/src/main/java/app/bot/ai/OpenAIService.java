@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AIService {
+public class OpenAIService {
   private final OpenAiService openAiService;
 
-  public AIService(@Value("${openai.api.key}") String apiKey) {
+  public OpenAIService(@Value("${openai.api.key}") String apiKey) {
     this.openAiService = new OpenAiService(apiKey);
   }
 
