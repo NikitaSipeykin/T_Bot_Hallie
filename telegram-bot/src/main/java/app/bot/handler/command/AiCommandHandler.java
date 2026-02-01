@@ -28,7 +28,7 @@ public class AiCommandHandler implements CommandHandler {
   public BotResponse handle(Message message) {
     Long chatId = message.getChatId();
 
-    userStateService.setState(chatId, UserState.HUG_FACE_AI);
+    userStateService.setState(chatId, UserState.OPENROUTER_AI);
     return new TextResponse(chatId, "Next message will send to ai!", null);
   }
 }
