@@ -55,8 +55,14 @@ public class StateCallbackHandler  implements CallbackHandler {
     text = new TextResponse(chatId, textService.format(TextMarker.HALLIE_USE_IT), null);
     audio = new MediaResponse(chatId, MediaType.VOICE, CommandKey.HALLIE_USE_IT);
 
+    TextResponse textForSchedule = new TextResponse(chatId, textService.format(TextMarker.SCHEDULER),
+        KeyboardFactory.from(List.of(
+             KeyboardOption.callback(textService.format(TextMarker.SCHEDULER_BUTTON), TextMarker.SCHEDULER_BUTTON))));
+
+
     delayedResponse.responses().add(text);
     delayedResponse.responses().add(audio);
+    delayedResponse.responses().add(textForSchedule);
 
     return new SendWithDelayedResponse(compositeResponse, delayedResponse, Duration.ofSeconds(2));
   }

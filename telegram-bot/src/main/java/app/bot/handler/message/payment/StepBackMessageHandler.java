@@ -38,6 +38,6 @@ public class StepBackMessageHandler implements MessageHandler {
 
     return new TextResponse(chatId, textService.format(TextMarker.STEP_BACK),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.STEP_BACK_BUTTON_YES), TextMarker.PROJECT_DESCRIPTION))));
+             KeyboardOption.callback(textService.format(TextMarker.STEP_BACK_BUTTON_YES), TextMarker.PROJECT_DESCRIPTION))));
   }
 }

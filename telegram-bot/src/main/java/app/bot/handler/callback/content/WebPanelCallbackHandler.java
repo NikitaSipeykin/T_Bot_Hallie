@@ -1,4 +1,4 @@
-package app.bot.handler.callback.content.demo;
+package app.bot.handler.callback.content;
 
 import app.bot.bot.CommandKey;
 import app.bot.bot.responce.*;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class DemoAccessCallbackHandler implements CallbackHandler {
+public class WebPanelCallbackHandler implements CallbackHandler {
 
   private final BotTextService textService;
   private final AccessServiceImpl accessService;
@@ -31,30 +31,28 @@ public class DemoAccessCallbackHandler implements CallbackHandler {
 
   @Override
   public boolean supports(String callbackData) {
-    return callbackData.equals(TextMarker.DEMO_ACCESS_BUTTON_UNLOCK);
+    return callbackData.equals(TextMarker.SCHEDULER_NEXT_BUTTON);
   }
 
   @Override
   public BotResponse handle(CallbackQuery query) {
     Long chatId = query.getMessage().getChatId();
-    userStateService.setState(chatId, UserState.DEMO_ACCESS);
-    accessService.grantAccess(chatId);
+    userStateService.setState(chatId, UserState.STATES);
 
     CompositeResponse compositeResponse = new CompositeResponse(new ArrayList<>());
-    CompositeResponse delayedResponse = new CompositeResponse(new ArrayList<>());
 
-    MediaResponse audio = new MediaResponse(chatId, MediaType.VOICE, CommandKey.ACCESS_AUDIO);
-    VideoResponse video = new VideoResponse(chatId, MediaType.VIDEO, CommandKey.ACCESS_VIDEO, 1280, 1002);
-    TextResponse text1 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_PAYMENT), null);
-    TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_NEXT),
+    MediaResponse audio = new MediaResponse(chatId, MediaType.VOICE, CommandKey.AUDIO_WEB_PANEL);
+    TextResponse text = new TextResponse(chatId, textService.format(TextMarker.WEB_PANEL_TEXT),
         KeyboardFactory.from(List.of(
-             KeyboardOption.callback(textService.format(TextMarker.ACCESS_BUTTON_NEXT), TextMarker.EMAIL))));
+             KeyboardOption.callback(textService.format(TextMarker.WEB_PANEL_TEXT_BUTTON), TextMarker.WEB_PANEL_TEXT_BUTTON))));
 
     compositeResponse.responses().add(audio);
-    compositeResponse.responses().add(video);
-    delayedResponse.responses().add(text1);
-    delayedResponse.responses().add(text2);
+    compositeResponse.responses().add(text);
 
-    return new SendWithDelayedResponse(compositeResponse, delayedResponse, Duration.ofSeconds(10));
+    audio = new MediaResponse(chatId, MediaType.VOICE, CommandKey.AUDIO_WEB_PANEL_END);
+
+    compositeResponse.responses().add(audio);
+
+    return compositeResponse;
   }
 }

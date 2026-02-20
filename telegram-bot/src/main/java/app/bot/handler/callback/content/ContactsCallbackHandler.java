@@ -1,50 +1,46 @@
-package app.bot.handler.callback.payment;
+package app.bot.handler.callback.content;
 
-import app.bot.bot.responce.BotResponse;
-import app.bot.bot.responce.TextResponse;
+import app.bot.bot.CommandKey;
+import app.bot.bot.responce.*;
 import app.bot.facade.AnalyticsFacade;
 import app.bot.handler.callback.CallbackHandler;
 import app.bot.keyboard.KeyboardFactory;
 import app.bot.keyboard.KeyboardOption;
 import app.bot.state.UserState;
 import app.bot.state.UserStateService;
+import app.module.content.AccessServiceImpl;
 import app.module.node.texts.BotTextService;
 import app.module.node.texts.TextMarker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class IntroPaymentCallbackHandler implements CallbackHandler {
+public class ContactsCallbackHandler  implements CallbackHandler {
 
   private final BotTextService textService;
+  private final AccessServiceImpl accessService;
   private final UserStateService userStateService;
   private final AnalyticsFacade analytics;
 
 
   @Override
   public boolean supports(String callbackData) {
-    return callbackData.equals(TextMarker.PROJECT_DESCRIPTION);
+    return callbackData.equals(TextMarker.ORDER_BOT_BUTTON) ||
+           callbackData.equals(TextMarker.WRITE_TO_DEV_BUTTON);
   }
 
   @Override
   public BotResponse handle(CallbackQuery query) {
     Long chatId = query.getMessage().getChatId();
+    userStateService.setState(chatId, UserState.STATES);
 
-    analytics.trackButtonClick(query, TextMarker.PROJECT_DESCRIPTION);
-
-    analytics.trackBlockView(chatId, TextMarker.PROJECT_DESCRIPTION,
-        Map.of("state", UserState.NEED_PAYMENT.name(), "source", "callback"));
-
-    userStateService.setState(chatId, UserState.NEED_PAYMENT);
-
-    return new TextResponse(chatId, textService.get(TextMarker.PROJECT_DESCRIPTION),
+    return new TextResponse(chatId, textService.format(TextMarker.CONTACTS_TEXT),
         KeyboardFactory.from(List.of(
-             KeyboardOption.callback(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_YES), TextMarker.PAYMENT),
-             KeyboardOption.callback(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_INFO), TextMarker.PROJECT_INFO))));
+            KeyboardOption.callback(textService.format(TextMarker.HALLIE_INTRODUCTION_BUTTON_BACK), TextMarker.DEVELOPER_TEXT_BUTTON))));
   }
 }

@@ -14,7 +14,7 @@ public class BotTextService {
     log.debug("Text key = " + key);
     return repo.findById(key)
         .map(BotText::getValue)
-        .orElse("Текст не найден: " + key);
+        .orElse("Text not found: " + key);
   }
 
   public String format(String key, Object... args) {

@@ -53,8 +53,8 @@ public class DemoStartCallbackHandler implements CallbackHandler {
     MediaResponse delayedVideo = new MediaResponse(chatId, MediaType.VOICE, CommandKey.DEMO_AUDIO);
     TextResponse delayedText = new TextResponse(chatId, textService.format(TextMarker.DEMO_ACCESS),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.DEMO_ACCESS_BUTTON_UNLOCK), TextMarker.DEMO_ACCESS_BUTTON_UNLOCK),
-            new KeyboardOption(textService.format(TextMarker.DEMO_ACCESS_BUTTON_CONTINUE), TextMarker.DEMO_ACCESS_BUTTON_CONTINUE))));
+             KeyboardOption.callback(textService.format(TextMarker.DEMO_ACCESS_BUTTON_UNLOCK), TextMarker.DEMO_ACCESS_BUTTON_UNLOCK),
+             KeyboardOption.callback(textService.format(TextMarker.DEMO_ACCESS_BUTTON_CONTINUE), TextMarker.DEMO_ACCESS_BUTTON_CONTINUE))));
 
     delayedResponse.responses().add(delayedVideo);
     delayedResponse.responses().add(delayedText);
