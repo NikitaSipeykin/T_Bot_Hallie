@@ -51,10 +51,11 @@ build/
 
 ### Properties ###
 application-secret.properties
-application.yml
+**/application.yaml
 **/application-secret.properties
 **/application.properties
 !**/application.properties.example
 /k8s/secret.yaml
 /telegram-bot/src/main/resources/video.mp4
 /telegram-bot/src/main/resources/audio.ogg
+

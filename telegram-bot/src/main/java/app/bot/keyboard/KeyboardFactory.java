@@ -12,20 +12,19 @@ public final class KeyboardFactory {
   }
 
   public static InlineKeyboardMarkup from(List<KeyboardOption> options) {
-    return build(options, KeyboardOption::text, KeyboardOption::callback);
-  }
-
-
-  private static <T> InlineKeyboardMarkup build(List<T> options, java.util.function.Function<T, String> textMapper,
-      java.util.function.Function<T, String> callbackMapper
-  ) {
 
     List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
-    for (T option : options) {
+    for (KeyboardOption option : options) {
+
       InlineKeyboardButton button = new InlineKeyboardButton();
-      button.setText(textMapper.apply(option));
-      button.setCallbackData(callbackMapper.apply(option));
+      button.setText(option.text());
+
+      if (option.url() != null) {
+        button.setUrl(option.url());
+      } else {
+        button.setCallbackData(option.callback());
+      }
 
       rows.add(List.of(button));
     }
@@ -34,4 +33,5 @@ public final class KeyboardFactory {
     markup.setKeyboard(rows);
     return markup;
   }
+
 }

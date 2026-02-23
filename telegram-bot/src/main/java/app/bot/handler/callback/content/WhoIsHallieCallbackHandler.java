@@ -47,8 +47,8 @@ public class WhoIsHallieCallbackHandler implements CallbackHandler {
 
     TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.HALLIE_INTRODUCTION_WANT_TO_SEE),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.HALLIE_INTRODUCTION_BUTTON_YES), TextMarker.BOT_ABILITY_BUTTON),
-            new KeyboardOption(textService.format(TextMarker.HALLIE_INTRODUCTION_BUTTON_BACK), TextMarker.HALLIE_INTRODUCTION_BUTTON_BACK))));
+             KeyboardOption.callback(textService.format(TextMarker.HALLIE_INTRODUCTION_BUTTON_YES), TextMarker.BOT_ABILITY_BUTTON),
+             KeyboardOption.callback(textService.format(TextMarker.HALLIE_INTRODUCTION_BUTTON_BACK), TextMarker.HALLIE_INTRODUCTION_BUTTON_BACK))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(text1);

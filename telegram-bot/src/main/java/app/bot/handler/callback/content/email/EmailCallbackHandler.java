@@ -42,8 +42,8 @@ public class EmailCallbackHandler implements CallbackHandler {
 
     TextResponse text = new TextResponse(chatId, textService.format(TextMarker.EMAIL),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.SEND_EMAIL_BUTTON), TextMarker.SEND_EMAIL_BUTTON),
-            new KeyboardOption(textService.format(TextMarker.NO_EMAIL_BUTTON), TextMarker.NO_EMAIL_BUTTON))));
+             KeyboardOption.callback(textService.format(TextMarker.SEND_EMAIL_BUTTON), TextMarker.SEND_EMAIL_BUTTON),
+             KeyboardOption.callback(textService.format(TextMarker.NO_EMAIL_BUTTON), TextMarker.NO_EMAIL_BUTTON))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(text);

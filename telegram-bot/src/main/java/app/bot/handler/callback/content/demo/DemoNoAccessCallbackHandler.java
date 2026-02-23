@@ -41,7 +41,7 @@ public class DemoNoAccessCallbackHandler  implements CallbackHandler {
 
     TextResponse text = new TextResponse(chatId, textService.format(TextMarker.NO_ACCESS),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.ACCESS_BUTTON_NEXT), TextMarker.EMAIL))));
+             KeyboardOption.callback(textService.format(TextMarker.ACCESS_BUTTON_NEXT), TextMarker.EMAIL))));
 
     compositeResponse.responses().add(text);
 

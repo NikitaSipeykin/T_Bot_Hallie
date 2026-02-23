@@ -38,10 +38,10 @@ public class PaymentCallbackHandler implements CallbackHandler {
 
       return new TextResponse(chatId, textService.format(TextMarker.PAYMENT_CHOOSE_CURRENCY),
           KeyboardFactory.from(List.of(
-              new KeyboardOption("UZS", "UZS"),
-              new KeyboardOption("USD", "USD"),
-              new KeyboardOption("EUR", "EUR"),
-              new KeyboardOption("RUB", "RUB"))));
+               KeyboardOption.callback("UZS", "UZS"),
+               KeyboardOption.callback("USD", "USD"),
+               KeyboardOption.callback("EUR", "EUR"),
+               KeyboardOption.callback("RUB", "RUB"))));
     }
     return new TextResponse(chatId, textService.format(TextMarker.PAYMENT_ERROR), null);
   }

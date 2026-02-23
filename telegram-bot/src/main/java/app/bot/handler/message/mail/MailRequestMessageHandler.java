@@ -53,6 +53,6 @@ public class MailRequestMessageHandler implements MessageHandler {
 
     return new TextResponse(chatId, textService.format(TextMarker.SEND_EMAIL),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.EMAIL_WAS_SENT_BUTTON), TextMarker.EMAIL_WAS_SENT_BUTTON))));
+             KeyboardOption.callback(textService.format(TextMarker.EMAIL_WAS_SENT_BUTTON), TextMarker.EMAIL_WAS_SENT_BUTTON))));
   }
 }

@@ -98,7 +98,7 @@ public class TelegramSender {
           var sendVoiceNote = noteService.buildVoice(r.chatId(), voice);
           botProvider.getObject().execute(sendVoiceNote);
         } catch (Exception e) {
-          log.error("Не удалось отправить голосовое сообщение chatId={}", r.chatId(), e);
+          log.error("Unable to send voice message chatId={}", r.chatId(), e);
         }
       }
 
@@ -132,7 +132,7 @@ public class TelegramSender {
           botProvider.getObject().execute(sendAudioNote);
 
         } catch (Exception e) {
-          log.error("Не удалось отправить аудио chatId={}", r.chatId(), e);
+          log.error("Unable to send audio file to chatId={}", r.chatId(), e);
         }
       }
 

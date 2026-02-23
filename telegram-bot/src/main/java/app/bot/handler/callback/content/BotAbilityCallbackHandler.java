@@ -42,9 +42,9 @@ public class BotAbilityCallbackHandler implements CallbackHandler {
     TextResponse text1 = new TextResponse(chatId, textService.format(TextMarker.BOT_ABILITY_INTRODUCTION), null);
     TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.BOT_ABILITY_ASK),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.BOT_ABILITY_BUTTON_NEED_BOT), TextMarker.BOT_ABILITY_BUTTON_NEED_BOT),
-            new KeyboardOption(textService.format(TextMarker.BOT_ABILITY_BUTTON_CURIOUS), TextMarker.BOT_ABILITY_BUTTON_CURIOUS),
-            new KeyboardOption(textService.format(TextMarker.BOT_ABILITY_BUTTON_DEV), TextMarker.BOT_ABILITY_BUTTON_DEV))));
+             KeyboardOption.callback(textService.format(TextMarker.BOT_ABILITY_BUTTON_NEED_BOT), TextMarker.BOT_ABILITY_BUTTON_NEED_BOT),
+             KeyboardOption.callback(textService.format(TextMarker.BOT_ABILITY_BUTTON_CURIOUS), TextMarker.BOT_ABILITY_BUTTON_CURIOUS),
+             KeyboardOption.callback(textService.format(TextMarker.BOT_ABILITY_BUTTON_DEV), TextMarker.BOT_ABILITY_BUTTON_DEV))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(text1);

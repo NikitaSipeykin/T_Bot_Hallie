@@ -40,7 +40,7 @@ public class NeedPaymentMessageHandler implements MessageHandler {
 
     return new TextResponse(chatId, textService.get(TextMarker.NEED_PAYMENT),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_YES), TextMarker.PAYMENT),
-            new KeyboardOption(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_INFO), TextMarker.PROJECT_INFO))));
+             KeyboardOption.callback(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_YES), TextMarker.PAYMENT),
+             KeyboardOption.callback(textService.format(TextMarker.PROJECT_DESCRIPTION_BUTTON_INFO), TextMarker.PROJECT_INFO))));
   }
 }

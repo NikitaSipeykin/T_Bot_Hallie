@@ -90,7 +90,7 @@ public class SendInvoicePaymentCallbackHandler implements CallbackHandler {
 
       TextResponse response = new TextResponse(chatId, textService.format(TextMarker.CURRENCY_CHOOSE_ANOTHER),
           KeyboardFactory.from(List.of(
-              new KeyboardOption(textService.format(TextMarker.CURRENCY_CHOOSE_BUTTON_BACK), TextMarker.PAYMENT))));
+               KeyboardOption.callback(textService.format(TextMarker.CURRENCY_CHOOSE_BUTTON_BACK), TextMarker.PAYMENT))));
 
       compositeResponse.responses().add(invoiceResponse);
       compositeResponse.responses().add(response);

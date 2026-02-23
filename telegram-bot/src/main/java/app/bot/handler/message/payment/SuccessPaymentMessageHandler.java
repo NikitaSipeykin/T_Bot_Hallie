@@ -45,6 +45,6 @@ public class SuccessPaymentMessageHandler implements MessageHandler {
 
     return new TextResponse(chatId, textService.format(TextMarker.PAYMENT_PROJECT_INTRO),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.PAYMENT_PROJECT_INTRO_BUTTON), TextMarker.AFTER_PAYMENT))));
+             KeyboardOption.callback(textService.format(TextMarker.PAYMENT_PROJECT_INTRO_BUTTON), TextMarker.AFTER_PAYMENT))));
   }
 }

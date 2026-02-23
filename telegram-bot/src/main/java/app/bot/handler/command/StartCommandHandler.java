@@ -55,9 +55,9 @@ public class StartCommandHandler implements CommandHandler {
         textService.format(TextMarker.START,
             firstName != null ? firstName : textService.format(TextMarker.START_COMMAND_USERNAME_FILLER)),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.BOT_ABILITY_BUTTON), TextMarker.BOT_ABILITY_BUTTON),
-            new KeyboardOption(textService.format(TextMarker.DEMO_MODE_BUTTON), TextMarker.DEMO_MODE_BUTTON),
-            new KeyboardOption(textService.format(TextMarker.WHO_IS_HALLIE_BUTTON), TextMarker.WHO_IS_HALLIE_BUTTON))));
+            KeyboardOption.callback(textService.format(TextMarker.BOT_ABILITY_BUTTON), TextMarker.BOT_ABILITY_BUTTON),
+            KeyboardOption.callback(textService.format(TextMarker.DEMO_MODE_BUTTON), TextMarker.DEMO_MODE_BUTTON),
+            KeyboardOption.callback(textService.format(TextMarker.WHO_IS_HALLIE_BUTTON), TextMarker.WHO_IS_HALLIE_BUTTON))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(text);

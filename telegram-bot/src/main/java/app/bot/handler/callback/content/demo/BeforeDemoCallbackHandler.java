@@ -65,7 +65,7 @@ public class BeforeDemoCallbackHandler implements CallbackHandler {
 
     TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.BEFORE_DEMO_BEGIN),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.BEFORE_DEMO_BEGIN_BUTTON), TextMarker.BEFORE_DEMO_BEGIN_BUTTON))));
+             KeyboardOption.callback(textService.format(TextMarker.BEFORE_DEMO_BEGIN_BUTTON), TextMarker.BEFORE_DEMO_BEGIN_BUTTON))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(text1);

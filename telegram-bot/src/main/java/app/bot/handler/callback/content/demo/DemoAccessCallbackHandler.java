@@ -48,7 +48,7 @@ public class DemoAccessCallbackHandler implements CallbackHandler {
     TextResponse text1 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_PAYMENT), null);
     TextResponse text2 = new TextResponse(chatId, textService.format(TextMarker.ACCESS_NEXT),
         KeyboardFactory.from(List.of(
-            new KeyboardOption(textService.format(TextMarker.ACCESS_BUTTON_NEXT), TextMarker.EMAIL))));
+             KeyboardOption.callback(textService.format(TextMarker.ACCESS_BUTTON_NEXT), TextMarker.EMAIL))));
 
     compositeResponse.responses().add(audio);
     compositeResponse.responses().add(video);

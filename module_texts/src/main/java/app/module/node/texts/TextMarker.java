@@ -107,5 +107,25 @@ public class TextMarker {
 
   public static final String GOAL_SUMMARY = "GOAL_SUMMARY";
   public static final String HALLIE_USE_IT = "HALLIE_USE_IT";
+
+  public static final String SCHEDULER = "SCHEDULER";
+  public static final String SCHEDULER_BUTTON = "SCHEDULER_BUTTON";
+  public static final String SCHEDULER_TEXT = "SCHEDULER_TEXT";
+  public static final String SCHEDULER_NEXT = "SCHEDULER_NEXT";
+  public static final String SCHEDULER_NEXT_BUTTON = "SCHEDULER_NEXT_BUTTON";
+
+  public static final String WEB_PANEL_TEXT = "WEB_PANEL_TEXT";
+  public static final String WEB_PANEL_TEXT_BUTTON = "WEB_PANEL_TEXT_BUTTON";
+
+  public static final String DEVELOPER_TEXT = "DEVELOPER_TEXT";
+  public static final String DEVELOPER_TEXT_BUTTON = "DEVELOPER_TEXT_BUTTON";
+
+  public static final String NIK_THE_DEV_TEXT = "NIK_THE_DEV_TEXT";
+  public static final String ORDER_BOT_BUTTON = "ORDER_BOT_BUTTON";
+  public static final String WRITE_TO_DEV_BUTTON = "WRITE_TO_DEV_BUTTON";
+  public static final String GITHUB_BUTTON = "GITHUB_BUTTON";
+
+  public static final String CONTACTS_TEXT = "CONTACTS_TEXT";
+  public static final String AI_BUTTON = "AI_BUTTON";
 }
 

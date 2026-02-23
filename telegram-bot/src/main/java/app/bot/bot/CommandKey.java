@@ -6,6 +6,11 @@ public class CommandKey {
   public static final String UNSUBSCRIBE = "/unsubscribe";
   public static final String REQUEST = "/request";
   public static final String MENU = "/menu";
+  public static final String AI = "/ai";
+  public static final String TRANSCRIBE = "/transcribe";
+  public static final String TRANSCRIBE_STATUS = "/transcribe_status";
+  public static final String TRANSCRIBE_TEXT = "/transcribe_text";
+  public static final String TRANSCRIBE_HISTORY = "/transcribe_history";
 
   // --- FILE KEYS ---
   public static final String HALLIE_START = "AUDIO_HALLIE_START";
@@ -22,4 +27,11 @@ public class CommandKey {
   public static final String ASK_EMAIL_AUDIO = "AUDIO_ASK_EMAIL_AUDIO";
   public static final String STATE_AUDIO = "AUDIO_STATE_AUDIO";
   public static final String HALLIE_USE_IT = "AUDIO_HALLIE_USE_IT";
+  public static final String SCHEDULER_INTRO = "AUDIO_SCHEDULER_INTRO";
+  public static final String SCHEDULER_OUTRO = "AUDIO_SCHEDULER_OUTRO";
+  public static final String AUDIO_WEB_PANEL = "AUDIO_WEB_PANEL";
+  public static final String AUDIO_WEB_PANEL_END = "AUDIO_WEB_PANEL_END";
+  public static final String AUDIO_DEVELOPER_INTRO = "AUDIO_DEVELOPER_INTRO";
+  public static final String AUDIO_DEVELOPER_END = "AUDIO_DEVELOPER_END";
+  public static final String AUDIO_FINAL = "AUDIO_FINAL";
 }
