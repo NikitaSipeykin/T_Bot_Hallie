@@ -25,7 +25,7 @@ public class TranscriptionWebController {
   @Value("${transcription.temp-dir:/tmp/transcription}")
   private String tempDir;
 
-  @Value("${bot.adminId}")
+  @Value("${BOT_ADMIN_ID}")
   private Long adminChatId;
 
   /**
