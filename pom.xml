@@ -25,6 +25,7 @@
         <module>telegram-bot</module>
         <module>module_analytics</module>
         <module>module_content</module>
+        <module>module_transcription</module>
 
     </modules>
 

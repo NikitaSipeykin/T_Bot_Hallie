@@ -35,7 +35,7 @@ public class OpenRouterMessageHandler implements MessageHandler {
 
     ChatCompletionRequest request = new ChatCompletionRequest(props.getModel(), List.of(userMessage), 7d, 20);
 
-    String json = "  \"model\": \"" + props.getModel() + "\",\n" +
+    String json = "  \"dao\": \"" + props.getModel() + "\",\n" +
                   "  \"messages\": [\n" +
                   "    {\n" +
                   "      \"role\": \"user\",\n" +

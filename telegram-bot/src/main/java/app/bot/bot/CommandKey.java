@@ -7,6 +7,10 @@ public class CommandKey {
   public static final String REQUEST = "/request";
   public static final String MENU = "/menu";
   public static final String AI = "/ai";
+  public static final String TRANSCRIBE = "/transcribe";
+  public static final String TRANSCRIBE_STATUS = "/transcribe_status";
+  public static final String TRANSCRIBE_TEXT = "/transcribe_text";
+  public static final String TRANSCRIBE_HISTORY = "/transcribe_history";
 
   // --- FILE KEYS ---
   public static final String HALLIE_START = "AUDIO_HALLIE_START";

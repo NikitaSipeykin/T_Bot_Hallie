@@ -34,7 +34,7 @@ public class MessageDispatcher {
 
     log.debug("Message text = " + text);
 
-    if (text.equals("successPayment")){
+    if (text != null && text.equals("successPayment")) {
       MessageHandler successHandler = handlers.get(UserState.SUCCESS_PAYMENT);
       return successHandler.handle(message);
     }

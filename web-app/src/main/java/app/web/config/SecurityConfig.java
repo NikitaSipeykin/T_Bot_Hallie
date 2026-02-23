@@ -26,7 +26,7 @@ public class SecurityConfig {
     http
         .csrf(csrf -> csrf.disable()) // отключаем CSRF (не форма логина, всё ок)
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/css/**", "/js/**").permitAll() // разрешаем статику
+            .requestMatchers("/css/**", "/js/**").permitAll()
             .anyRequest().authenticated() // всё остальное — под логином
         )
         .httpBasic(Customizer.withDefaults()) // простая basic-auth
