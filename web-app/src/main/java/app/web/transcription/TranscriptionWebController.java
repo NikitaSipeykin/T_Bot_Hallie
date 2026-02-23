@@ -34,49 +34,60 @@ public class TranscriptionWebController {
   ) {
     if (file.isEmpty()) {
       return ResponseEntity.badRequest()
-          .body(Map.of("error", "The file is empty."));
+          .body(Map.of("error", "File is empty"));
     }
 
     String originalName = file.getOriginalFilename();
     if (originalName == null) originalName = "upload_" + System.currentTimeMillis();
 
     try {
-      // Сохраняем файл во временную папку
       Path tempDirPath = Path.of(tempDir);
       Files.createDirectories(tempDirPath);
 
-      String uniqueName = UUID.randomUUID() + "_" + originalName;
-      Path savedFile = tempDirPath.resolve(uniqueName);
-      file.transferTo(savedFile);
+      // Save raw file temporarily
+      String uniqueId = UUID.randomUUID().toString();
+      String ext = getExtension(originalName);
+      Path rawFile = tempDirPath.resolve(uniqueId + "_raw." + ext);
+      file.transferTo(rawFile);
+      log.info("Web upload saved raw: {} ({} bytes)", rawFile.getFileName(), Files.size(rawFile));
 
-      log.info("Web upload saved: {} ({} bytes)", uniqueName, Files.size(savedFile));
+      // Convert video/heavy formats to mp3 immediately
+      Path inputFile;
+      String finalName;
+      if (shouldConvert(originalName)) {
+        Path mp3File = tempDirPath.resolve(uniqueId + "_converted.mp3");
+        convertToMp3(rawFile, mp3File);
+        Files.deleteIfExists(rawFile);
+        inputFile = mp3File;
+        finalName = stripExtension(originalName) + ".mp3";
+        log.info("Converted to mp3: {} ({} bytes)", mp3File.getFileName(), Files.size(mp3File));
+      } else {
+        inputFile = rawFile;
+        finalName = originalName;
+      }
 
-      // Ставим в очередь
       UUID jobId = transcriptionService.submit(
           TranscriptionCommand.fromWeb(
               adminChatId,
-              originalName,
-              file.getSize(),
-              savedFile.toString()
+              finalName,
+              Files.size(inputFile),
+              inputFile.toString()
           )
       );
 
       return ResponseEntity.ok(Map.of(
           "jobId", jobId.toString(),
-          "fileName", originalName,
-          "message", "File accepted. The result will be sent via Telegram."
+          "fileName", finalName,
+          "message", "File accepted. Result will be sent to Telegram."
       ));
 
     } catch (Exception e) {
       log.error("Web upload failed: {}", e.getMessage(), e);
       return ResponseEntity.internalServerError()
-          .body(Map.of("error", "Download error: " + e.getMessage()));
+          .body(Map.of("error", "Error: " + e.getMessage()));
     }
   }
 
-  /**
-   * Статус задачи по ID — для polling из JS
-   */
   @GetMapping("/status/{jobId}")
   public ResponseEntity<Map<String, String>> status(@PathVariable String jobId) {
     try {
@@ -84,7 +95,46 @@ public class TranscriptionWebController {
       return ResponseEntity.ok(Map.of("status", status));
     } catch (Exception e) {
       return ResponseEntity.badRequest()
-          .body(Map.of("error", "Task not found"));
+          .body(Map.of("error", "Job not found"));
     }
+  }
+
+  private void convertToMp3(Path input, Path output) throws Exception {
+    ProcessBuilder pb = new ProcessBuilder(
+        "ffmpeg", "-y",
+        "-i", input.toString(),
+        "-vn",           // no video
+        "-ar", "16000",  // 16kHz optimal for Whisper
+        "-ac", "1",      // mono
+        "-b:a", "64k",   // bitrate sufficient for speech
+        output.toString()
+    );
+    pb.redirectErrorStream(true);
+    Process process = pb.start();
+    String ffmpegOutput = new String(process.getInputStream().readAllBytes());
+    int code = process.waitFor();
+    if (code != 0) {
+      log.error("FFmpeg conversion failed (code {}): {}", code, ffmpegOutput);
+      throw new RuntimeException("Conversion failed. FFmpeg code: " + code);
+    }
+  }
+
+  private boolean shouldConvert(String filename) {
+    if (filename == null) return false;
+    String lower = filename.toLowerCase();
+    return lower.endsWith(".mov") || lower.endsWith(".mp4")
+           || lower.endsWith(".avi") || lower.endsWith(".mkv")
+           || lower.endsWith(".webm") || lower.endsWith(".m4a")
+           || lower.endsWith(".m4v") || lower.endsWith(".wmv");
+  }
+
+  private String getExtension(String filename) {
+    int dot = filename.lastIndexOf('.');
+    return dot >= 0 ? filename.substring(dot + 1) : "bin";
+  }
+
+  private String stripExtension(String filename) {
+    int dot = filename.lastIndexOf('.');
+    return dot >= 0 ? filename.substring(0, dot) : filename;
   }
 }
