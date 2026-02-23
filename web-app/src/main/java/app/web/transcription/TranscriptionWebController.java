@@ -28,18 +28,13 @@ public class TranscriptionWebController {
   @Value("${BOT_ADMIN_ID}")
   private Long adminChatId;
 
-  /**
-   * Принимает файл (включая .mov, .mp4, .mp3 и др.),
-   * сохраняет на диск и ставит в очередь транскрибации.
-   * Результат придёт администратору в Telegram.
-   */
   @PostMapping("/upload")
   public ResponseEntity<Map<String, Object>> upload(
       @RequestParam("file") MultipartFile file
   ) {
     if (file.isEmpty()) {
       return ResponseEntity.badRequest()
-          .body(Map.of("error", "Файл пустой"));
+          .body(Map.of("error", "The file is empty."));
     }
 
     String originalName = file.getOriginalFilename();
@@ -69,13 +64,13 @@ public class TranscriptionWebController {
       return ResponseEntity.ok(Map.of(
           "jobId", jobId.toString(),
           "fileName", originalName,
-          "message", "Файл принят. Результат придёт в Telegram."
+          "message", "File accepted. The result will be sent via Telegram."
       ));
 
     } catch (Exception e) {
       log.error("Web upload failed: {}", e.getMessage(), e);
       return ResponseEntity.internalServerError()
-          .body(Map.of("error", "Ошибка загрузки: " + e.getMessage()));
+          .body(Map.of("error", "Download error: " + e.getMessage()));
     }
   }
 
@@ -89,7 +84,7 @@ public class TranscriptionWebController {
       return ResponseEntity.ok(Map.of("status", status));
     } catch (Exception e) {
       return ResponseEntity.badRequest()
-          .body(Map.of("error", "Задача не найдена"));
+          .body(Map.of("error", "Task not found"));
     }
   }
 }

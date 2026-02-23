@@ -35,17 +35,17 @@ public class TranscriptionUploadMessageHandler implements MessageHandler {
 
     if (fileInfo == null) {
       return new TextResponse(chatId,
-          "⚠️ Пожалуйста, отправьте аудио или видео файл.\n\n" +
-          "Поддерживаются: голосовые, аудио, видео, документы с аудио/видео.",
+          "⚠️ Please send an audio or video file..\n\n" +
+          "Supported: voice, audio, video, documents with audio/video.",
           null
       );
     }
 
     if (fileInfo.fileSize != null && fileInfo.fileSize > MAX_FILE_SIZE) {
       return new TextResponse(chatId,
-          "⚠️ Файл слишком большой: " + (fileInfo.fileSize / 1024 / 1024) + " MB\n\n" +
-          "Telegram ограничивает файлы до 20MB.\n" +
-          "Для больших файлов используйте веб-панель: /transcription",
+          "⚠️ The file is too large.: " + (fileInfo.fileSize / 1024 / 1024) + " MB\n\n" +
+          "Telegram limits files to 20MB.\n" +
+          "For large files, use the web panel: /transcription",
           null
       );
     }
@@ -59,14 +59,14 @@ public class TranscriptionUploadMessageHandler implements MessageHandler {
     userStateService.setState(chatId, UserState.DEFAULT);
 
     String durationStr = fileInfo.duration != null
-        ? "\n⏱ Длительность: " + formatDuration(fileInfo.duration)
+        ? "\n⏱ Duration: " + formatDuration(fileInfo.duration)
         : "";
 
     return new TextResponse(chatId,
-        "✅ Файл принят!\n" +
+        "✅ File accepted!\n" +
         "📁 " + fileInfo.fileName + durationStr + "\n\n" +
-        "⏳ Поставлен в очередь. Уведомлю когда готово.\n\n" +
-        "Статус: /transcribe_status",
+        "⏳ Placed in queue. I will notify you when it is ready..\n\n" +
+        "Status: /transcribe_status",
         null
     );
   }
@@ -115,8 +115,8 @@ public class TranscriptionUploadMessageHandler implements MessageHandler {
   }
 
   private String formatDuration(int seconds) {
-    if (seconds < 60) return seconds + " сек";
-    return (seconds / 60) + " мин " + (seconds % 60) + " сек";
+    if (seconds < 60) return seconds + " sec";
+    return (seconds / 60) + " min " + (seconds % 60) + " sec";
   }
 
   private record FileInfo(String fileId, String fileName, Long fileSize, Integer duration) {}
