@@ -76,7 +76,7 @@ public class TranscriptionWorker {
 
     } catch (Exception e) {
       log.error("Unexpected worker error", e);
-      if (job != null) markError(job, "Внутренняя ошибка: " + e.getMessage());
+      if (job != null) markError(job, "Internal error: " + e.getMessage());
     } finally {
       semaphore.release();
     }
@@ -97,7 +97,7 @@ public class TranscriptionWorker {
         return;
       }
     }
-    throw new RuntimeException("Whisper не запустился за " + WHISPER_START_TIMEOUT_SEC + " секунд");
+    throw new RuntimeException("Whisper did not start up " + WHISPER_START_TIMEOUT_SEC + " seconds");
   }
 
   private void maybeShutdownWhisper() {
@@ -222,7 +222,7 @@ public class TranscriptionWorker {
   }
 
   private String buildSummary(String text) {
-    if (text == null || text.isBlank()) return "Текст пуст";
+    if (text == null || text.isBlank()) return "Text is empty";
     if (text.length() < 400) return text;
 
     String[] sentences = text.split("(?<=[.!?])\\s+");

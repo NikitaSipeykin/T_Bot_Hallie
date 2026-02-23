@@ -36,13 +36,22 @@ public class TranscriptionServiceImpl implements TranscriptionService {
   public String getStatusText(UUID jobId) {
     return jobRepository.findById(jobId)
         .map(job -> switch (job.getStatus()) {
-          case PENDING      -> "⏳ В очереди";
-          case DOWNLOADING  -> "📥 Скачиваю файл...";
-          case CONVERTING   -> "🔄 Конвертирую аудио...";
-          case TRANSCRIBING -> "🎙️ Транскрибирую...";
-          case DONE         -> "✅ Готово";
-          case ERROR        -> "❌ Ошибка: " + job.getErrorMessage();
+          case PENDING      -> "⏳ In queue";
+          case DOWNLOADING  -> "📥 Downloading file...";
+          case CONVERTING   -> "🔄 Converting audio...";
+          case TRANSCRIBING -> "🎙️ Transcribing...";
+          case DONE         -> "✅ Done";
+          case ERROR        -> "❌ Error: " + job.getErrorMessage();
         })
-        .orElse("Задача не найдена");
+        .orElse("Task not found");
   }
 }
+
+//          case PENDING      -> “⏳ In queue”;
+//          case DOWNLOADING  -> “📥 Downloading file...”;
+//          case CONVERTING   -> “🔄 Converting audio...”;
+//          case TRANSCRIBING -> “🎙️ Transcribing...”;
+//          case DONE         -> “✅ Done”;
+//          case ERROR        -> “❌ Error: ” + job.getErrorMessage();
+//        })
+//        .orElse(“Task not found”);
